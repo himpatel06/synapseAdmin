@@ -1,0 +1,71 @@
+import { Box, Typography, useTheme,IconButton } from "@mui/material";
+import { DataGrid } from "@mui/x-data-grid";
+import { tokens } from "../../theme";
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+
+
+
+const ShowEvents = ({mockDataTeam}) => {
+  const theme = useTheme();
+  const colors = tokens(theme.palette.mode);
+  const columns = [
+   
+    {
+      field: "eventName",
+      headerName: "Event Name",
+      flex: 1,
+      cellClassName: "name-column--cell",
+    },
+  
+    {
+      field: "contestantName",
+      headerName: "Candidate Name",
+      flex: 1,
+    },
+    {
+      field: "position",
+      headerName: "Position",
+      flex: 1,
+    },
+  ];
+ 
+  return (
+   
+    <Box m="20px">
+      <Box
+        m="40px 0 0 0"
+        height="75vh"
+        sx={{
+          "& .MuiDataGrid-root": {
+            border: "none",
+          },
+          "& .MuiDataGrid-cell": {
+            borderBottom: "none",
+          },
+          "& .name-column--cell": {
+            color: colors.greenAccent[300],
+          },
+          "& .MuiDataGrid-columnHeaders": {
+            backgroundColor: colors.blueAccent[700],
+            borderBottom: "none",
+          },
+          "& .MuiDataGrid-virtualScroller": {
+            backgroundColor: colors.primary[400],
+          },
+          "& .MuiDataGrid-footerContainer": {
+            borderTop: "none",
+            backgroundColor: colors.blueAccent[700],
+          },
+          "& .MuiCheckbox-root": {
+            color: `${colors.greenAccent[200]} !important`,
+          },
+        }}
+      >
+        <DataGrid checkboxSelection rows={mockDataTeam} columns={columns} getRowId={(row)=>row._id}/>
+      </Box>
+    </Box>
+  );
+};
+
+export default ShowEvents;
